@@ -1,0 +1,10 @@
+# Normalize all text files to use LF in the repository
+* text=auto
+
+# Force specific files to use LF
+*.js text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
+
+# Force certain files (e.g., Windows scripts) to use CRLF
+*.bat text eol=crlf
