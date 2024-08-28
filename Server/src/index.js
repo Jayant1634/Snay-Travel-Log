@@ -1,43 +1,45 @@
 const express = require('express');
-const morgan= require('morgan');
-const helmet= require('helmet');
-const cors= require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const middlewares = require('./middlewares');
 const logs = require('./api/logs');
-
 
 require('dotenv').config();
 
 const app = express();
 
+// Connect to MongoDB
 mongoose.connect(process.env.DATABASE_URL)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-
+// Middleware setup
 app.use(morgan('common'));
 app.use(helmet());
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000', // Defaulting to localhost if not set in .env
 }));
 
 app.use(express.json());
 
-
-app.get('/', (req,res)=>{
+// Routes
+app.get('/', (req, res) => {
     res.json({
-        message:'hello world',
+        message: 'hello world',
     });
 });
 
 app.use('/api/logs', logs);
 
+// Middleware for handling 404 and errors
 app.use(middlewares.notFound);
-
 app.use(middlewares.errorHandler);
 
-const port= process.env.Port || 1337;
-app.listen(port,()=>{
-    console.log(`listening at http://localhost:${port}`);
+// Start the server
+const port = process.env.PORT || 1337; // Correct casing for PORT
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
 });
+

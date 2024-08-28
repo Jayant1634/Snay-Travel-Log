@@ -1,6 +1,33 @@
+require('dotenv').config();
 const express = require('express');
+const rateLimit = require('express-rate-limit');
+const MongoStore = require('rate-limit-mongo');
+
 const LogEntry = require('../models/LogEntry');
 const router = express.Router();
+
+const {
+    API_KEY,
+    DATABASE_URL,
+} = process.env;
+
+var rateLimitDelay = 10 * 1000; // 10 second delay
+
+const limiter = rateLimit({
+  store: new MongoStore({
+    uri: DATABASE_URL,
+    collectionName: 'rateLimits', // Name of the collection to store rate limit data
+    expireTimeMs: rateLimitDelay,
+    errorHandler: (err) => {
+      console.error('Rate limit store error:', err);
+    }
+  }),
+  max: 1, // Limit each IP to 1 request per windowMs
+  windowMs: rateLimitDelay, // 10 seconds
+});
+
+// Apply the rate limiter middleware to routes
+// router.use(limiter);
 
 // Simple GET route for testing
 router.get('/', async (req, res, next) => {
