@@ -25,5 +25,5 @@ RUN chown -R node:node .
 # Expose the port the app runs on
 EXPOSE 7860
 
-# Command to run the Node.js server
+# Command to run the Node.js server a
 CMD ["npm", "run","dev"]
