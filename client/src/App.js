@@ -40,7 +40,7 @@ const App = () => {
   };
 
   const defaultCenter = {
-    lat: 37.6, lng: -95.665
+    lat: 27.5530, lng: 76.6346
   };
 
   // Fetch log entries from API
