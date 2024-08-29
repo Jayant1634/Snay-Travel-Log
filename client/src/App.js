@@ -62,6 +62,7 @@ const App = () => {
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
     });
+
   };
 
   return (

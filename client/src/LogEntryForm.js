@@ -11,8 +11,9 @@ const LogEntryForm = ({ location, onClose }) => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      data.latitude = location.latitude;
-      data.longitude = location.longitude;
+      data.latitude = location.lat;
+      data.longitude = location.lng;
+      console.log(data);
       await createLogEntry(data);
       onClose(); // Close the popup after a successful submission
     } catch (error) {
@@ -27,13 +28,6 @@ const LogEntryForm = ({ location, onClose }) => {
     <form onSubmit={handleSubmit(onSubmit)} className="entry-form">
       {error && <h3 className="error">{error}</h3>}
       
-      <label htmlFor="apiKey">API Key</label>
-      <input
-        type="password"
-        name="apiKey"
-        required
-        {...register("apiKey")} // Correct register usage
-      />
       
       <label htmlFor="title">Title</label>
       <input
