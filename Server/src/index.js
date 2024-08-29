@@ -19,7 +19,7 @@ mongoose.connect(process.env.DATABASE_URL)
 app.use(morgan('common'));
 app.use(helmet());
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000', // Defaulting to localhost if not set in .env
+    origin: process.env.CORS_ORIGIN || '*', // Defaulting to localhost if not set in .env
 }));
 
 app.use(express.json());
@@ -38,7 +38,7 @@ app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
 // Start the server
-const port = process.env.PORT || 1337; // Correct casing for PORT
+const port = process.env.PORT || 7860; // Correct casing for PORT
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
 });
