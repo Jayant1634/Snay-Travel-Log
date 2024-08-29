@@ -3,7 +3,7 @@ name: Push Backend to Hugging Face
 on:
   push:
     paths:
-      - 'Server/'
+      - 'Server/*'
     branches:
       - main
   workflow_dispatch:  # Allows the workflow to be manually triggered
