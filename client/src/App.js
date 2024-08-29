@@ -32,7 +32,7 @@ const App = () => {
   const [logEntries, setLogEntries] = useState([]);
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [addEntryLocation, setAddEntryLocation] = useState(null);
-  const [mapCenter, setMapCenter] = useState({ lat: 37.6, lng: -95.665 });
+  const [mapCenter, setMapCenter] = useState({ lat: 27.5530, lng: 76.6346 });
 
   const mapStyles = {
     height: "100vh",
